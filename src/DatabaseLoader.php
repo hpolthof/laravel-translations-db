@@ -5,6 +5,13 @@ use Illuminate\Translation\LoaderInterface;
 
 class DatabaseLoader implements LoaderInterface {
 
+    protected $_app = null;
+
+    public function __construct($app)
+    {
+        $this->_app = $app;
+    }
+
     /**
      * Load the messages for the given locale.
      *
@@ -71,7 +78,9 @@ class DatabaseLoader implements LoaderInterface {
             ]);
             \DB::table('translations')->insert($data);
         } else {
-            \DB::table('translations')->where('id', $item->id)->update($data);
+            if($this->_app['config']->get('translation-db.update_viewed_at')) {
+                \DB::table('translations')->where('id', $item->id)->update($data);
+            }
         }
     }
 }

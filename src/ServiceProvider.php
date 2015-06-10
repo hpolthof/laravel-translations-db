@@ -18,6 +18,8 @@ class ServiceProvider extends \Illuminate\Translation\TranslationServiceProvider
 	 */
 	public function register()
 	{
+		$this->mergeConfigFrom(__DIR__.'/../config/translation-db.php', 'translation-db');
+
 		$this->registerDatabase();
 		$this->registerLoader();
 
@@ -44,6 +46,10 @@ class ServiceProvider extends \Illuminate\Translation\TranslationServiceProvider
 		$this->publishes([
 			__DIR__.'/../database/migrations/' => database_path('/migrations')
 		], 'migrations');
+
+		$this->publishes([
+			__DIR__.'/../config/translation-db.php' => config_path('translation-db.php'),
+		]);
 	}
 
 	/**
@@ -63,7 +69,7 @@ class ServiceProvider extends \Illuminate\Translation\TranslationServiceProvider
 	{
 		$this->app->singleton('translation.database', function($app)
 		{
-			return new DatabaseLoader();
+			return new DatabaseLoader($app);
 		});
 	}
 
