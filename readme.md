@@ -5,7 +5,8 @@
 [![Total Downloads](https://poser.pugx.org/hpolthof/laravel-translations-db/d/total.png)](https://packagist.org/packages/hpolthof/laravel-translations-db)
 
 This package was created for everyone who got tired of collecting translations in language files and maintaining dozens
-of arrays, filled with lots and lots of keys.
+of arrays, filled with lots and lots of keys. Keys will be added to the database **automaticly**, so no more hussling with
+adding your keys to the translations file. You'll never forget to translate a key anymore! In production your keys will be cached to ensure the localization stays blazing fast!
 
 ## Installation
 
