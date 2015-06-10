@@ -39,3 +39,6 @@ php artisan migrate
 ```
 
 And that's all there is to it!
+
+## Web interface
+Although it's currently unavailable, a web interface to ease your translations once more, is scheduled to be added soon.
