@@ -4,7 +4,7 @@
 [![License](https://poser.pugx.org/hpolthof/laravel-translations-db/license.svg)](https://packagist.org/packages/hpolthof/laravel-translations-db)
 [![Total Downloads](https://poser.pugx.org/hpolthof/laravel-translations-db/d/total.png)](https://packagist.org/packages/hpolthof/laravel-translations-db)
 
-This package was created for everyone who got tired of collecting translations in language files and maintaining dozens
+This package was created, as an **in-place replacement** for the default TranslationServiceProvider and mend for everyone who got tired of collecting translations in language files and maintaining dozens
 of arrays, filled with lots and lots of keys. Keys will be added to the database **automatically**, so no more hussling with
 adding your keys to the translations file. You'll never forget to translate a key anymore! In production your keys will be **cached** to ensure the localization stays blazing fast!
 
@@ -43,6 +43,15 @@ php artisan migrate
 ```
 
 And that's all there is to it!
+
+## Usage
+You can just start using translations as you would normaly do with the Laravels default package. The functions ```trans()``` and ```Lang::get()``` can be used as you normaly would.
+> For more information about Localization and the usage of these functions, please refer to the [Documentation](http://laravel.com/docs/5.1/localization) on the mather.
+
+### Files are still possible
+The usage of translation files is however still possible. Every translation prefixed by a namespace is parsed through the old
+TranslationServiceProvider. This is needed for external packages that come with there own translation files. But in general
+you shouldn't be bothered by this.
 
 ## Web interface
 To prevent you from having to access the database for every translation, a web interface is available to manager your
