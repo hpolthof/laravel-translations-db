@@ -8,6 +8,11 @@ return [
     'update_viewed_at' => true,
 
     /**
+     * This setting enables or disables the web interface and its routes.
+     */
+    'webinterface' => true,
+
+    /**
      * This is the prefix for on which URI the Translations Manager will
      * be available. You can leave it just as is in most cases.
      */

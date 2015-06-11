@@ -77,3 +77,7 @@ the textbox loses it's focus, the translation will be saved.
 > it will be advised to disable the Debugbar as every Ajax request slows your browser down. By default de Debugbar will
 > therefor be disabled, it the Debugbar is used. If you want to leave the Debugbar on, you can just enable it within
 > the ```translation-db.php``` config file.
+
+### Turn it off
+If you don't want any additional routes forced into your application, you can disable the whole web interface by
+changing the ```translation-db.webinterface``` config from ```TRUE``` to ```FALSE```.
