@@ -18,6 +18,8 @@ Require this package with composer:
 ```
 composer require hpolthof/laravel-translation-db
 ```
+> Like to live on the edge?
+> Use: ```composer require 'hpolthof/laravel-translations-db:*@dev'```
 
 After updating composer, we'll have to replace the TranslationServiceProvider the our ServiceProvider in config/app.php.
 
