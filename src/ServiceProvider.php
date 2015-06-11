@@ -33,12 +33,14 @@ class ServiceProvider extends \Illuminate\Translation\TranslationServiceProvider
 			// configuration so we can easily get both of these values from there.
 			$locale = $app['config']['app.locale'];
 
-			$trans = new Translator($database, $loader, $locale);
+			$trans = new Translator($database, $loader, $locale, $app);
 
 			$trans->setFallback($app['config']['app.fallback_locale']);
 
 			return $trans;
 		});
+
+
 	}
 
 	public function boot()
@@ -50,6 +52,41 @@ class ServiceProvider extends \Illuminate\Translation\TranslationServiceProvider
 		$this->publishes([
 			__DIR__.'/../config/translation-db.php' => config_path('translation-db.php'),
 		]);
+
+		$this->loadViewsFrom(__DIR__.'/../views', 'translation');
+		$this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'translation');
+
+		// Only in debug mode the translations interface should be available.
+		if($this->app['config']->get('app.debug')) {
+			$routeConfig = [
+				'namespace' => 'Hpolthof\Translation\Controllers',
+				'prefix' => $this->app['config']->get('translation-db.route_prefix'),
+			];
+			$this->app['router']->group($routeConfig, function($router) {
+				$router->get('/', [
+					'uses' => 'TranslationsController@getIndex',
+					'as' => 'translations.index',
+				]);
+				$router->get('/groups', [
+					'uses' => 'TranslationsController@getGroups',
+					'as' => 'translations.groups',
+				]);
+				$router->get('/locales', [
+					'uses' => 'TranslationsController@getLocales',
+					'as' => 'translations.locales',
+				]);
+				$router->post('/items', [
+					'uses' => 'TranslationsController@postItems',
+					'as' => 'translations.items',
+				]);
+				$router->post('/store', [
+					'uses' => 'TranslationsController@postStore',
+					'as' => 'translations.store',
+				]);
+			});
+		}
+
+		$this->app['translation.database']->addNamespace(null, null);
 	}
 
 	/**

@@ -1,13 +1,17 @@
 <?php namespace Hpolthof\Translation;;
 
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Translation\LoaderInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 
 class Translator extends \Illuminate\Translation\Translator implements TranslatorInterface {
 
-	public function __construct(LoaderInterface $database, LoaderInterface $loader, $locale)
+	protected $app = null;
+
+	public function __construct(LoaderInterface $database, LoaderInterface $loader, $locale, Application $app)
 	{
 		$this->database = $database;
+		$this->app = $app;
 		parent::__construct($loader, $locale);
 	}
 

@@ -42,4 +42,26 @@ php artisan migrate
 And that's all there is to it!
 
 ## Web interface
-Although it's currently unavailable, a web interface to ease your translations once more, is scheduled to be added soon.
+To prevent you from having to access the database for every translation, a web interface is available to manager your
+translations.
+
+Direct your browser to:
+```
+http://{projectUrl}/_translations
+```
+> This location can also be changed in the ```translation-db.php``` config file.
+
+### Configure your workset
+At the Translations Manager you'll have to select a certain group, as well as a locale. The first locale you'll select
+represents the language you'll be using as a reference to create your translations.
+In the textfield you should enter the locale you want to create or edit.
+> The locale you should enter in the textfield, can be any locale. There is no need to predefine anything. The entries will be created just as you submit your translations.
+After selecting these settings, just hit the Load button and all the collected translations will be listed.
+
+### Editing
+After your translation keys are loaded, a textbox will appear on each row. You can just type in your translation, when
+the textbox loses it's focus, the translation will be saved.
+> The saving takes place through some Ajax calls. If you are using the [Laravel Debugbar](https://github.com/barryvdh/laravel-debugbar)
+> it will be advised to disable the Debugbar as every Ajax request slows your browser down. By default de Debugbar will
+> therefor be disabled, it the Debugbar is used. If you want to leave the Debugbar on, you can just enable it within
+> the ```translation-db.php``` config file.

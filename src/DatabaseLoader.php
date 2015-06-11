@@ -1,13 +1,13 @@
 <?php namespace Hpolthof\Translation;
 
-use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Translation\LoaderInterface;
 
 class DatabaseLoader implements LoaderInterface {
 
     protected $_app = null;
 
-    public function __construct($app)
+    public function __construct(Application $app)
     {
         $this->_app = $app;
     }
