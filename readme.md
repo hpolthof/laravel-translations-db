@@ -8,6 +8,9 @@ This package was created for everyone who got tired of collecting translations i
 of arrays, filled with lots and lots of keys. Keys will be added to the database **automatically**, so no more hussling with
 adding your keys to the translations file. You'll never forget to translate a key anymore! In production your keys will be **cached** to ensure the localization stays blazing fast!
 
+![screenshot](https://cloud.githubusercontent.com/assets/1415623/8106863/4fa2c052-1045-11e5-8d7e-1655f435ee5b.png)
+
+
 ## Installation
 
 Require this package with composer:
