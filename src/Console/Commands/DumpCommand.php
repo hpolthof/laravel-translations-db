@@ -85,7 +85,7 @@ class DumpCommand extends Command {
 			foreach($groups as $group => $content) {
 				$path = $lang_path."/{$locale}";
 				if(!\File::exists($path)) {
-					\File::makeDirectory($lang_path, 0755, true);
+					\File::makeDirectory($path, 0755, true);
 				}
 
 				$file = $path."/{$group}.php";
