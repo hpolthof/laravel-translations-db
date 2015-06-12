@@ -11,6 +11,10 @@ class ServiceProvider extends \Illuminate\Translation\TranslationServiceProvider
 	 */
 	protected $defer = true;
 
+	protected $commands = [
+		'Hpolthof\Translation\Console\Commands\DumpCommand',
+	];
+
 	/**
 	 * Register the service provider.
 	 *
@@ -22,6 +26,8 @@ class ServiceProvider extends \Illuminate\Translation\TranslationServiceProvider
 
 		$this->registerDatabase();
 		$this->registerLoader();
+
+		$this->commands($this->commands);
 
 		$this->app->singleton('translator', function($app)
 		{
