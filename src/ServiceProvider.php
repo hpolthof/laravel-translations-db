@@ -13,6 +13,7 @@ class ServiceProvider extends \Illuminate\Translation\TranslationServiceProvider
 
 	protected $commands = [
 		'Hpolthof\Translation\Console\Commands\DumpCommand',
+		'Hpolthof\Translation\Console\Commands\FetchCommand',
 	];
 
 	/**
