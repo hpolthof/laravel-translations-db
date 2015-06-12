@@ -83,3 +83,21 @@ the textbox loses it's focus, the translation will be saved.
 ### Turn it off
 If you don't want any additional routes forced into your application, you can disable the whole web interface by
 changing the ```translation-db.webinterface``` config from ```TRUE``` to ```FALSE```.
+
+## Importing and exporting
+To ease the proces of migrating to translations in the database, two commands are available since version 0.3.
+### Import
+To import all translations out of your current language files, you can use the command:
+```
+php artisan translation:fetch
+```
+This will import all available translations in language files into the database.
+> To import just some specifics you can also make use of the options ```--locale``` and ```--group```.
+
+### Export
+To dump the translations from your database back to your filesystem, use:
+```
+php artisan translation:dump
+```
+> The options ```--locale``` and ```--group``` are also available for this command.
+> **Caution**: all current files will be **overwritten**, so use with care!
