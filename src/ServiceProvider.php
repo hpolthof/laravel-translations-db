@@ -9,7 +9,7 @@ class ServiceProvider extends \Illuminate\Translation\TranslationServiceProvider
 	 *
 	 * @var bool
 	 */
-	protected $defer = true;
+	protected $defer = false;
 
 	protected $commands = [
 		'Hpolthof\Translation\Console\Commands\DumpCommand',
