@@ -13,7 +13,8 @@
     "php": ">=5.4.0",
     "illuminate/translation": "5.*",
     "illuminate/database": "5.*",
-    "illuminate/cache": "5.*"
+    "illuminate/cache": "5.*",
+    "stichoza/google-translate-php": "~3.1"
   },
 
   "autoload": {
