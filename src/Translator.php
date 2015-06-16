@@ -68,7 +68,7 @@ class Translator extends \Illuminate\Translation\Translator implements Translato
 		// This will allow legacy support.
 		if(!self::isNamespaced($namespace)) {
 			// If debug is off then cache the result forever to ensure high performance.
-			if(!\Config::get('app.debug')) {
+			if(!\Config::get('app.debug') || \Config::get('translation-db.minimal')) {
 				$that = $this;
 				$lines = \Cache::rememberForever('__translations.'.$locale.'.'.$group, function() use ($that, $locale, $group, $namespace) {
 					return $this->database->load($locale, $group, $namespace);

@@ -26,4 +26,12 @@ return [
      * You can however turn it on, the choice is yours.
      */
     'disable_debugbar' => true,
+
+    /**
+     * - Force translations to be cached, even in Debug Mode.
+     * - And disables the collection of new keys.
+     * This can be used to prevent lots of queries from
+     * happening.
+     */
+    'minimal' => false,
 ];
