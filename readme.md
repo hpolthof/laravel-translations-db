@@ -80,6 +80,11 @@ the textbox loses it's focus, the translation will be saved.
 > therefor be disabled, it the Debugbar is used. If you want to leave the Debugbar on, you can just enable it within
 > the ```translation-db.php``` config file.
 
+### Google Translate integration
+As of version 0.4.0 support integration with Google Translate is included. In the Translations Manager a button has been added for Google Translate. All blank and currently opened translations will then be processed through Google Translate and be written into the textbox.
+> These translations are not yet stored into the database and need to be reviewed manually. As soon as the textbox loses it's
+> focus the translation will be stored. To prevent you from being blocked by Google there is an interval of 500 miliseconds between each request.
+
 ### Turn it off
 If you don't want any additional routes forced into your application, you can disable the whole web interface by
 changing the ```translation-db.webinterface``` config from ```TRUE``` to ```FALSE```.
