@@ -50,9 +50,26 @@
             </div>
         </div>
 
+        <div class="row" ng-if="items.length > 0">
+            <div class="col-md-offset-2 col-md-6">
+                <div class="progress">
+                    <div class="progress-bar progress-bar-warning progress-bar-striped" style="width: [[ (translateResult.skip / translateResult.total) * 100 ]]%"></div>
+                    <div class="progress-bar progress-bar-success progress-bar-striped" style="width: [[ (translateResult.success / translateResult.total) * 100 ]]%"></div>
+                    <div class="progress-bar progress-bar-danger progress-bar-striped" style="width: [[ (translateResult.errors / translateResult.total) * 100 ]]%"></div>
+                    <div class="progress-bar progress-bar-info progress-bar-striped" style="width: [[ (translateResult.loading / translateResult.total) * 100 ]]%"></div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <button class="btn btn-info form-control" ng-click="translateAll()">
+                    {{ trans('translation::manager.google') }}
+                </button>
+            </div>
+        </div>
+
         <div class="row datarow" ng-repeat="item in items">
             <div class="col-md-3 text">
                 [[ item.name ]]
+                <span ng-if="item.check == true" class="label label-warning">Unsaved!</span>
             </div>
             <div class="col-md-4 text">
                 [[ item.value ]]

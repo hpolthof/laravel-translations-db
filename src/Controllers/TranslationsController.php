@@ -3,6 +3,7 @@
 use Hpolthof\Translation\TranslationException;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Stichoza\GoogleTranslate\TranslateClient;
 
 class TranslationsController extends Controller {
 
@@ -89,5 +90,11 @@ class TranslationsController extends Controller {
             throw new TranslationException('Database error...');
         }
         return 'OK';
+    }
+
+    public function postTranslate(Request $request) {
+        $text = TranslateClient::translate($request->input('origin'), $request->input('target'), $request->input('text'));
+        $key = $request->input('key');
+        return compact('key', 'text');
     }
 }

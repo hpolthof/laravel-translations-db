@@ -19,6 +19,48 @@
             $scope.items = [];
         }
 
+        $scope.translateResult = {'total': 0, 'loading': 0, 'errors': 0, 'skip': 0, 'success': 0};
+        $scope.translateAll = function() {
+            $scope.translateResult = {'total': 0, 'loading': 0, 'errors': 0, 'skip': 0, 'success': 0};
+            $scope.translateResult.total = $scope.items.length;
+            var requests = 0;
+
+            for(key in $scope.items) {
+                $scope.translateResult.loading++;
+                if($scope.items[key].translation === null || $scope.items[key].translation === '') {
+                    requests++;
+                    setTimeout(function(key){
+                        $scope.translate($scope.items[key].value, $scope.items[key].name, function(data) {
+                            $scope.translateResult.loading--;
+                            $scope.translateResult.success++;
+                            for(i in $scope.items) {
+                                if($scope.items[i].name === data.key) {
+                                    $scope.items[i].translation = data.text;
+                                    $scope.items[i].check = true;
+                                }
+                            }
+                        }, function() {
+                            $scope.translateResult.loading--;
+                            $scope.translateResult.errors++;
+                        });
+                    }, 500*requests, key);
+                } else {
+                    $scope.translateResult.loading--;
+                    $scope.translateResult.skip++;
+                }
+            }
+        };
+
+        $scope.translate = function(text, key, success, error) {
+            $http.post("{{ URL::route('translations.translate') }}", {
+                'key': key,
+                'origin': $scope.currentLocale,
+                'target': $scope.currentEditable,
+                'text': text
+            }).success(success)
+            .error(error);
+        };
+
         $scope.fetch = function() {
             $http.post("{{ URL::route('translations.items') }}", {
                 'group': $scope.currentGroup,
@@ -42,6 +84,7 @@
             .error(function(data, status, headers, config) {
                 $scope.setMessage(status, 'danger');
             });
+            $scope.items[$index].check = false;
         }
 
         $scope.locales = [];

@@ -90,6 +90,10 @@ class ServiceProvider extends \Illuminate\Translation\TranslationServiceProvider
 					'uses' => 'TranslationsController@postStore',
 					'as' => 'translations.store',
 				]);
+				$router->post('/translate', [
+					'uses' => 'TranslationsController@postTranslate',
+					'as' => 'translations.translate',
+				]);
 			});
 		}
 
