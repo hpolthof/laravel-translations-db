@@ -102,6 +102,17 @@ class DumpCommand extends Command {
 		}
 	}
 
+	private function assignArrayByPath(&$arr, $path, $value) {
+		$keys = explode('.', $path);
+
+		while ($key = array_shift($keys)) {
+			$arr = &$arr[$key];
+			if(is_array($arr)) ksort($arr);
+		}
+
+		$arr = $value;
+	}
+
 	/**
 	 * @param $content
 	 * @param $locale
@@ -110,6 +121,8 @@ class DumpCommand extends Command {
 	 */
 	protected function getFileTemplate($content, $locale, $group, $date)
 	{
+		$content = $this->convertToOrderedNestedArray($content);
+
 		$array_text = var_export($content, true);
 		$data = <<<EOF
 <?php
@@ -132,6 +145,20 @@ EOF;
 				$content[$key] = $key;
 			}
 		}
+		return $content;
+	}
+
+	/**
+	 * @param $content
+	 * @return array
+	 */
+	private function convertToOrderedNestedArray($content)
+	{
+		$new_content = array();
+		foreach ($content as $key => $value) {
+			$this->assignArrayByPath($new_content, $key, $value);
+		}
+		$content = $new_content;
 		return $content;
 	}
 
