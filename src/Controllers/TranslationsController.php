@@ -97,4 +97,11 @@ class TranslationsController extends Controller {
         $key = $request->input('key');
         return compact('key', 'text');
     }
+
+    public function postDelete(Request $request)
+    {
+        \DB::table('translations')
+            ->where('name', strtolower($request->get('name')))->delete();
+        return 'OK';
+    }
 }

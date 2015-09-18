@@ -94,6 +94,10 @@ class ServiceProvider extends \Illuminate\Translation\TranslationServiceProvider
 					'uses' => 'TranslationsController@postTranslate',
 					'as' => 'translations.translate',
 				]);
+				$router->post('/delete', [
+					'uses' => 'TranslationsController@postDelete',
+					'as' => 'translations.delete',
+				]);
 			});
 		}
 

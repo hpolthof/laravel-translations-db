@@ -71,11 +71,16 @@
                 [[ item.name ]]
                 <span ng-if="item.check == true" class="label label-warning">Unsaved!</span>
             </div>
-            <div class="col-md-4 text">
+            <div class="col-md-3 text">
                 [[ item.value ]]
             </div>
             <div class="col-md-5">
                 <textarea class="form-control" ng-blur="store($index)" ng-model="item.translation" onfocus="jQuery(this).closest('.row').addClass('bg-success');" onblur="jQuery(this).closest('.row').removeClass('bg-success');"></textarea>
+            </div>
+            <div class="col-md-1">
+                <button type="button" class="btn btn-danger" ng-click="delete($index)">
+                    {{ trans('translation::manager.delete') }}
+                </button>
             </div>
         </div>
     </div>

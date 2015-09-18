@@ -5,4 +5,5 @@ return [
     'locale_placeholder' => 'Enter the locale you wish to edit. (example: en)',
     'button' => 'Load',
     'google' => 'Google Translate',
+    'delete' => 'Delete',
 ];

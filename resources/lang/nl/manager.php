@@ -5,4 +5,5 @@ return [
     'locale_placeholder' => 'Geef de taal op die uw wilt bewerken. (bijvoorbeeld: nl)',
     'button' => 'Inladen',
     'google' => 'Google Translate',
+    'delete' => 'Verwijderen',
 ];

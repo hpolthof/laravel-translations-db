@@ -17,7 +17,7 @@
 
         $scope.clear = function() {
             $scope.items = [];
-        }
+        };
 
         $scope.translateResult = {'total': 0, 'loading': 0, 'errors': 0, 'skip': 0, 'success': 0};
         $scope.translateAll = function() {
@@ -61,6 +61,14 @@
             .error(error);
         };
 
+        $scope.delete = function($index) {
+            $http.post("{{ URL::route('translations.delete') }}", {
+                'name': $scope.items[$index].name
+            }).success(function() {
+                $scope.items.splice($index, 1);
+            });
+        };
+
         $scope.fetch = function() {
             $http.post("{{ URL::route('translations.items') }}", {
                 'group': $scope.currentGroup,
@@ -85,7 +93,7 @@
                 $scope.setMessage(status, 'danger');
             });
             $scope.items[$index].check = false;
-        }
+        };
 
         $scope.locales = [];
         $scope.groups = [];
@@ -94,6 +102,7 @@
         $scope.currentEditable = null;
         $scope.items = [];
         $scope.message = null;
+        $scope.showEmptyOnly = false;
 
         $http.get("{{ URL::route('translations.locales') }}").success(function(data) {
             $scope.locales = data;
