@@ -148,11 +148,11 @@ EOF;
 
 			$filler = str_repeat(' ', $max_key_length - strlen($key));
 
-			$result .= $ident.str_repeat(' ', $ident_size)."'{$key}'{$filler} => ";
-
 			if(is_array($value)) {
+				$result .= $ident.str_repeat(' ', $ident_size)."'{$key}' => ";
 				$result .= $this->getArrayText($value, $ident_size, $level+1);
 			} else {
+				$result .= $ident.str_repeat(' ', $ident_size)."'{$key}'{$filler} => ";
 				$result .= var_export($value, true);
 			}
 			$result .= ",\n";
