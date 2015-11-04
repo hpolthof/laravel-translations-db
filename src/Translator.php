@@ -26,6 +26,7 @@ class Translator extends \Illuminate\Translation\Translator implements Translato
 	 * @param  string  $key
 	 * @param  array   $replace
 	 * @param  string  $locale
+	 * @param  bool	   $fallback
 	 * @return string
 	 */
 	public function get($key, array $replace = array(), $locale = null, $fallback = true)
