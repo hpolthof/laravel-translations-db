@@ -28,7 +28,7 @@ class Translator extends \Illuminate\Translation\Translator implements Translato
 	 * @param  string  $locale
 	 * @return string
 	 */
-	public function get($key, array $replace = array(), $locale = null)
+	public function get($key, array $replace = array(), $locale = null, $fallback = true)
 	{
 		list($namespace, $group, $item) = $this->parseKey($key);
 
