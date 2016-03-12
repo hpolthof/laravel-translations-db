@@ -64,7 +64,7 @@ class FetchCommand extends Command {
     }
 
     protected function cleanLocaleDir($item) {
-        return str_replace($this->lang_path.'/', '', $item);
+        return basename($item);
     }
 
     protected function cleanGroupDir($item, $locale) {
