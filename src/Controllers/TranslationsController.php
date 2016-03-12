@@ -36,7 +36,6 @@ class TranslationsController extends Controller {
     }
 
     public function postItems(Request $request) {
-        if(strlen($request->get('translate')) == 0) throw new TranslationException();
 
         $base = \DB::table('translations')
             ->select('name', 'value')
