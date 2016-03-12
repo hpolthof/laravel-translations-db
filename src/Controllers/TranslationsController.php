@@ -93,7 +93,9 @@ class TranslationsController extends Controller {
     }
 
     public function postTranslate(Request $request) {
-        $text = TranslateClient::translate($request->input('origin'), $request->input('target'), $request->input('text'));
+        $text = preg_replace('/(:)(\w+)/', '--$2', $request->input('text'));
+        $text = TranslateClient::translate($request->input('origin'), $request->input('target'), $text);
+        $text = preg_replace('/(--)(\w+)/', ':$2', $text);
         $key = $request->input('key');
         return compact('key', 'text');
     }
