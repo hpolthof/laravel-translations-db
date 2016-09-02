@@ -186,7 +186,12 @@ EOF;
 	{
 		$new_content = array();
 		foreach ($content as $key => $value) {
-			$this->assignArrayByPath($new_content, $key, $value);
+			// Quick fix, see: https://github.com/hpolthof/laravel-translations-db/issues/13
+			//$this->assignArrayByPath($new_content, $key, $value);
+			if($value){
+    				array_set($new_content, $key, $value);
+			}
+			ksort($new_content);
 		}
 		$content = $new_content;
 		return $content;
