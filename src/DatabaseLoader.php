@@ -25,7 +25,7 @@ class DatabaseLoader implements LoaderInterface {
         return \DB::table('translations')
             ->where('locale', $locale)
             ->where('group', $group)
-            ->lists('value', 'name');
+            ->pluck('value', 'name');
     }
 
     /**

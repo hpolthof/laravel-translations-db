@@ -24,7 +24,7 @@ class TranslationsController extends Controller {
             ->select('group')
             ->distinct()
             ->orderBy('group')
-            ->lists('group');
+            ->pluck('group');
     }
 
     public function getLocales() {
@@ -32,7 +32,7 @@ class TranslationsController extends Controller {
             ->select('locale')
             ->distinct()
             ->orderBy('locale')
-            ->lists('locale');
+            ->pluck('locale');
     }
 
     public function postItems(Request $request) {
@@ -49,7 +49,7 @@ class TranslationsController extends Controller {
             ->where('locale', strtolower($request->get('translate')))
             ->where('group', $request->get('group'))
             ->orderBy('name')
-            ->lists('value', 'name');
+            ->pluck('value', 'name');
 
         foreach($base as &$item) {
             $translate = null;
