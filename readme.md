@@ -16,7 +16,7 @@ adding your keys to the translations file, automatic translation with **Google T
 Require this package with composer:
 
 ```
-composer require hpolthof/laravel-translation-db
+composer require hpolthof/laravel-translations-db
 ```
 > Like to live on the edge?
 > Use: ```composer require 'hpolthof/laravel-translations-db:*@dev'```
