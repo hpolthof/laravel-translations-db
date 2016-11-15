@@ -1,5 +1,6 @@
 <?php namespace Hpolthof\Translation;
 
+use Illuminate\Database\Query\Builder;
 use Illuminate\Translation\FileLoader;
 
 class ServiceProvider extends \Illuminate\Translation\TranslationServiceProvider {
@@ -135,4 +136,22 @@ class ServiceProvider extends \Illuminate\Translation\TranslationServiceProvider
 		return array('translator', 'translation.loader', 'translation.database');
 	}
 
+	/**
+	 * Alternative pluck to stay backwards compatible with Laravel 5.1 LTS.
+	 *
+	 * @param Builder $query
+	 * @param $column
+	 * @param null $key
+	 * @return array|mixed
+	 */
+	public static function pluckOrLists(Builder $query, $column, $key = null)
+	{
+		if(\Illuminate\Foundation\Application::VERSION < '5.2') {
+			$result = $query->lists($column, $key);
+		} else {
+			$result = $query->pluck($column, $key);
+		}
+
+		return $result;
+	}
 }

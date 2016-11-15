@@ -38,16 +38,19 @@ class Translator extends \Illuminate\Translation\Translator implements Translato
 		// the translator was instantiated. Then, we can load the lines and return.
 		foreach ($this->parseLocale($locale) as $locale)
 		{
-			if(!self::isNamespaced($namespace)) {
-				// Database stuff
-				$this->database->addTranslation($locale, $group, $key);
-			}
-
 			$this->load($namespace, $group, $locale);
 
 			$line = $this->getLine(
 				$namespace, $group, $locale, $item, $replace
 			);
+
+			// If we cannot find the translation group in the database nor as a file
+			// an entry in the database will be added to the translations.
+			// Keep in mind that a file cannot be used from that point.
+			if(!self::isNamespaced($namespace) && is_null($line)) {
+				// Database stuff
+				$this->database->addTranslation($locale, $group, $key);
+			}
 
 			if ( ! is_null($line)) break;
 		}
@@ -72,14 +75,32 @@ class Translator extends \Illuminate\Translation\Translator implements Translato
 			if(!\Config::get('app.debug') || \Config::get('translation-db.minimal')) {
 				$that = $this;
 				$lines = \Cache::rememberForever('__translations.'.$locale.'.'.$group, function() use ($that, $locale, $group, $namespace) {
-					return $this->database->load($locale, $group, $namespace);
+					return $that->loadFromDatabase($namespace, $group, $locale);
 				});
 			} else {
-				$lines = $this->database->load($locale, $group, $namespace);
+				$lines = $this->loadFromDatabase($namespace, $group, $locale);
 			}
 		} else {
 			$lines = $this->loader->load($locale, $group, $namespace);
 		}
 		$this->loaded[$namespace][$group][$locale] = $lines;
+	}
+
+	/**
+	 * @param $namespace
+	 * @param $group
+	 * @param $locale
+	 * @return array
+	 */
+	protected function loadFromDatabase($namespace, $group, $locale)
+	{
+		$lines = $this->database->load($locale, $group, $namespace);
+
+		if (count($lines) == 0 && \Config::get('translation-db.file_fallback', false)) {
+			$lines = $this->loader->load($locale, $group, $namespace);
+			return $lines;
+		}
+
+		return $lines;
 	}
 }

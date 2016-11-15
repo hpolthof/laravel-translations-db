@@ -22,10 +22,11 @@ class DatabaseLoader implements LoaderInterface {
      */
     public function load($locale, $group, $namespace = null)
     {
-        return \DB::table('translations')
+        $query = \DB::table('translations')
             ->where('locale', $locale)
-            ->where('group', $group)
-            ->pluck('value', 'name');
+            ->where('group', $group);
+
+        return ServiceProvider::pluckOrLists($query, 'value', 'name');
     }
 
     /**
