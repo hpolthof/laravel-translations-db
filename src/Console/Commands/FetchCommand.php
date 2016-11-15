@@ -260,7 +260,18 @@ class FetchCommand extends Command {
         foreach ($keys as $name => $value) {
             list($inserted, $updated) = $this->storeTranslation($locale, $group, $name, $value, $inserted, $updated);
         }
+
+        $this->flushCache($locale, $group);
+
         $this->info("Fetched {$locale}/{$group}.php [New: {$inserted}, Updated: {$updated}]");
     }
 
+    /**
+     * @param $locale
+     * @param $group
+     */
+    protected function flushCache($locale, $group)
+    {
+        \Cache::forget('__translations.'.$locale.'.'.$group);
+    }
 }
