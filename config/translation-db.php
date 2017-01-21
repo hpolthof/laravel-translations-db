@@ -28,12 +28,15 @@ return [
     'disable_debugbar' => true,
 
     /**
-     * - Force translations to be cached, even in Debug Mode.
-     * - And disables the collection of new keys.
      * This can be used to prevent lots of queries from
      * happening.
      */
-    'minimal' => false,
+    'cache' => !env('APP_DEBUG', false),
+
+    /**
+     * Collect new keys
+     */
+    'collect' => env('APP_DEBUG', false),
 
     /**
      * Use locales from files as a fallback option. Be aware that
