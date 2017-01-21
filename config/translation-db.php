@@ -10,7 +10,7 @@ return [
     /**
      * This setting enables or disables the web interface and its routes.
      */
-    'webinterface' => true,
+    'webinterface' => env('APP_DEBUG', false),
 
     /**
      * This is the prefix for on which URI the Translations Manager will
@@ -28,12 +28,15 @@ return [
     'disable_debugbar' => true,
 
     /**
-     * - Force translations to be cached, even in Debug Mode.
-     * - And disables the collection of new keys.
      * This can be used to prevent lots of queries from
      * happening.
      */
-    'minimal' => false,
+    'cache' => !env('APP_DEBUG', false),
+
+    /**
+     * Collect new keys
+     */
+    'collect' => env('APP_DEBUG', false),
 
     /**
      * Use locales from files as a fallback option. Be aware that
