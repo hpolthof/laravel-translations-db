@@ -85,6 +85,8 @@ class DatabaseLoader implements LoaderInterface {
         }
     }
 
+    /** Laravel 5.4  additions **/
+
      /**
      * Get an array of all the registered namespaces.
      * This function will not be used but is required
