@@ -23,8 +23,10 @@
     }
   },
   "extra": {
-    "branch-alias": {
-      "dev-master": "0.4.x-dev"
+    "laravel" : {
+      "providers" : [
+        "Hpolthof\\Translation\\ServiceProvider"
+      ]
     }
   }
 }
