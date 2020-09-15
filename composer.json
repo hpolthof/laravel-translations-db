@@ -2,7 +2,12 @@
   "name": "hpolthof/laravel-translations-db",
   "description": "A database translations implementation for Laravel 5.",
   "license": "GPL2",
-  "keywords": ["laravel", "translation", "localization", "database"],
+  "keywords": [
+    "laravel",
+    "translation",
+    "localization",
+    "database"
+  ],
   "authors": [
     {
       "name": "Paul Olthof",
@@ -10,21 +15,20 @@
     }
   ],
   "require": {
-    "php": ">=5.4.0",
-    "illuminate/translation": "5.*",
-    "illuminate/database": "5.*",
-    "illuminate/cache": "5.*",
-    "stichoza/google-translate-php": "~3.1"
+    "php": ">=7.2",
+    "illuminate/translation": "7.28.*",
+    "illuminate/database": "7.28.*",
+    "illuminate/cache": "7.28.*",
+    "stichoza/google-translate-php": "4.1.*"
   },
-
   "autoload": {
     "psr-4": {
       "Hpolthof\\Translation\\": "src"
     }
   },
   "extra": {
-    "laravel" : {
-      "providers" : [
+    "laravel": {
+      "providers": [
         "Hpolthof\\Translation\\ServiceProvider"
       ]
     }
